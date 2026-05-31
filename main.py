@@ -1,13 +1,17 @@
+from Checkers.SpamChecker import SpamChecker
+from Checkers.EscalationChecker import EscalationChecker
+
 import os
+import shutil
+
 from dataclasses import dataclass 
 from pathlib import Path
-import shutil
-from Checkers.SpamChecker import SpamChecker
 
 mail_box = "inbox"
 keywords = ["partner"]
 
 spam = SpamChecker()
+escalation = EscalationChecker()
 
 @dataclass
 class Mail:
@@ -23,13 +27,17 @@ for filename in os.listdir(mail_box):
             with open(mail_path, "r", encoding="utf-8", errors="ignore") as f:
                 mail = Mail(f.read())
                 src = Path(f"inbox/{filename}")
-                print(filename)
-                if spam.spam_checker(mail):
-  
-                    dst = Path(f"emails_box/spam/{filename}")
 
+                if spam.check(mail):
+                    dst = Path(f"emails_box/spam/{filename}")
                     dst.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy(src, dst)
+                
+                if escalation.check(mail):
+                    dst = Path(f"emails_box/escalation/{filename}")
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy(src, dst)
+                    
                     
         except Exception as e:
             print("Ошибка:", e)
