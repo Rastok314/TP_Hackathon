@@ -1,5 +1,6 @@
 from Checkers.SpamChecker import SpamChecker
 from Checkers.EscalationChecker import EscalationChecker
+from Checkers.AutomaticSystemsChecker import AutomaticSystemsChecker
 
 import os
 import shutil
@@ -12,6 +13,7 @@ keywords = ["partner"]
 
 spam = SpamChecker()
 escalation = EscalationChecker()
+auto = AutomaticSystemsChecker()
 
 @dataclass
 class Mail:
@@ -32,8 +34,13 @@ for filename in os.listdir(mail_box):
                     dst = Path(f"emails_box/spam/{filename}")
                     dst.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy(src, dst)
-                
-                if escalation.check(mail):
+                    
+                elif auto.check(mail):
+                    dst = Path(f"emails_box/auto_systems/{filename}")
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy(src, dst)
+                    
+                elif escalation.check(mail):
                     dst = Path(f"emails_box/escalation/{filename}")
                     dst.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy(src, dst)
