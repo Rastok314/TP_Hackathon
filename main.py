@@ -1,6 +1,8 @@
 from Checkers.SpamChecker import SpamChecker
 from Checkers.EscalationChecker import EscalationChecker
 from Checkers.AutomaticSystemsChecker import AutomaticSystemsChecker
+from Checkers.HRChecker import HRChecker
+from Checkers.CommunicationChecker import CommunicationChecker
 
 import os
 import shutil
@@ -11,9 +13,12 @@ from pathlib import Path
 mail_box = "inbox"
 keywords = ["partner"]
 
-spam = SpamChecker()
 escalation = EscalationChecker()
+
+spam = SpamChecker()
 auto = AutomaticSystemsChecker()
+communication = CommunicationChecker()
+hr = HRChecker()
 
 @dataclass
 class Mail:
@@ -29,21 +34,33 @@ for filename in os.listdir(mail_box):
             with open(mail_path, "r", encoding="utf-8", errors="ignore") as f:
                 mail = Mail(f.read())
                 src = Path(f"inbox/{filename}")
-
+                
                 if spam.check(mail):
                     dst = Path(f"emails_box/spam/{filename}")
                     dst.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy(src, dst)
                     
-                elif auto.check(mail):
+                    
+                if escalation.check(mail):
+                    filename = "ESCALATED_" + filename
+                    
+                    
+                if auto.check(mail):
                     dst = Path(f"emails_box/auto_systems/{filename}")
                     dst.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy(src, dst)
-                    
-                elif escalation.check(mail):
-                    dst = Path(f"emails_box/escalation/{filename}")
+                
+                elif communication.check(mail):
+                    dst = Path(f"emails_box/communication/{filename}")
                     dst.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy(src, dst)
+                    
+                elif hr.check(mail):
+                    dst = Path(f"emails_box/hr/{filename}")
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy(src, dst)
+                
+
                     
                     
         except Exception as e:
