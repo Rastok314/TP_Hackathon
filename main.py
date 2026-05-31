@@ -1,29 +1,38 @@
 import os
+from dataclasses import dataclass 
+from pathlib import Path
+import shutil
+from Checkers.SpamChecker import SpamChecker
 
-folder_path = "inbox"
+mail_box = "inbox"
 keywords = ["partner"]
 
-keywords = [k.lower() for k in keywords]
-print("ВСЕ файлы:", os.listdir(folder_path))
-found = False
+spam = SpamChecker()
 
-for filename in os.listdir(folder_path):
-    print("Проверяю файл:", filename)
+@dataclass
+class Mail:
+    text: str
+    sender: str = None
 
-    if filename.endswith(".txt") or filename.endswith(".log"):
-        file_path = os.path.join(folder_path, filename)
+for filename in os.listdir(mail_box):
+
+    if filename.endswith(".txt"):
+        mail_path = os.path.join(mail_box, filename)
 
         try:
-            with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-                content = f.read().lower()
+            with open(mail_path, "r", encoding="utf-8", errors="ignore") as f:
+                mail = Mail(f.read())
+                src = Path(f"inbox/{filename}")
+                print(filename)
+                if spam.spam_checker(mail):
+  
+                    dst = Path(f"emails_box/spam/{filename}")
 
-                for word in keywords:
-                    if word in content:
-                        print("✔ найдено:", word, "в", filename)
-                        found = True
-
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy(src, dst)
+                    
         except Exception as e:
             print("Ошибка:", e)
 
-if not found:
-    print("\nНичего не найдено")
+
+
