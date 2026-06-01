@@ -67,10 +67,10 @@ for filename in os.listdir(mail_box):
                     category = "auto_systems"
                 elif communication.check(mail):
                     category = "communication"
-                elif hr.check(mail):
-                    category = "hr"
                 elif service.check(mail):
                     category = "service"
+                elif hr.check(mail):
+                    category = "hr"
                 elif docs.check(mail):
                     category = "documents"
                 else:
