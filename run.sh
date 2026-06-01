@@ -6,8 +6,9 @@ cd "$(dirname "$0")"
 
 echo "=== CHECK ENV ==="
 
-if [ ! -d "venv" ]; then
-    echo "Creating venv..."
+if [ ! -f "venv/bin/activate" ]; then
+    echo "Creating/Recreating venv..."
+    rm -rf venv
     python3 -m venv venv
 fi
 
@@ -17,11 +18,16 @@ if [ -f "requirements.txt" ]; then
     pip install -r requirements.txt
 fi
 
-if [ "$1" = "test" ]; then
-    echo "=== RUN TESTS ==="
-    PYTHONPATH=. pytest -q
+if [ "$1" = "start" ] || [ -z "$1" ]; then
+    echo "=== RUN APP ==="
+    python -m src.main
     exit 0
 fi
 
-echo "=== RUN APP ==="
-python src/main.py
+if [ "$1" = "test" ]; then
+    echo "=== RUN TESTS ==="
+    python -m pytest -q
+    exit 0
+fi
+
+echo "Usage: start | test"

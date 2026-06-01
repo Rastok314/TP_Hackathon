@@ -1,5 +1,5 @@
 import re
-from KeyWords.SERVICE_KEYWORDS import key_words1, key_words2, key_words3
+from src.KeyWords.SERVICE_KEYWORDS import key_words1, key_words2, key_words3
 
 class ServiceRequestsChecker:
 

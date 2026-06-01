@@ -1,5 +1,5 @@
 import re
-from KeyWords.SPAM_KEYWORDS import key_words
+from src.KeyWords.SPAM_KEYWORDS import key_words
 
 class SpamChecker:
     

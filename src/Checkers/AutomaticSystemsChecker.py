@@ -1,5 +1,5 @@
 import re
-from KeyWords.AUTO_KEYWORDS import key_words
+from src.KeyWords.AUTO_KEYWORDS import key_words
 
 class AutomaticSystemsChecker:
 

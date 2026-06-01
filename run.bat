@@ -1,26 +1,37 @@
 @echo off
-cd /d %~dp0
+setlocal
+
+cd /d "%~dp0"
+
+echo === CHECK VENV ===
+
+if not exist venv\Scripts\python.exe (
+    echo === Creating virtual environment ===
+    rmdir /s /q venv
+    py -m venv venv
+)
 
 echo === Installing dependencies ===
-py -m pip install -r requirements.txt
+venv\Scripts\python.exe -m pip install -r requirements.txt
 
 if "%1"=="start" goto start
 if "%1"=="test" goto test
 
-echo Unknown command. Use:
+echo Usage:
 echo   run.bat start
 echo   run.bat test
 goto end
 
 :start
 echo === STARTING APP ===
-py src/main.py
+venv\Scripts\python.exe -m src.main
 goto end
 
 :test
 echo === RUNNING TESTS ===
-py -m pytest
+venv\Scripts\python.exe -m pytest -q
 goto end
 
 :end
+endlocal
 pause

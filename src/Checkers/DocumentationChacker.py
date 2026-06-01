@@ -1,5 +1,5 @@
 import re
-from KeyWords.DOCUMENTS_KEYWORDS import key_words
+from src.KeyWords.DOCUMENTS_KEYWORDS import key_words
 
 class DocumentationChecker:
 

@@ -1,5 +1,5 @@
 import re
-from KeyWords.COMMUNICATION import key_words
+from src.KeyWords.COMMUNICATION import key_words
 
 class CommunicationChecker:
 

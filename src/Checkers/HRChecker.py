@@ -1,5 +1,5 @@
 import re
-from KeyWords.HR_KEYWORDS import key_words
+from src.KeyWords.HR_KEYWORDS import key_words
 
 class HRChecker:
 

@@ -1,5 +1,5 @@
 import re
-from KeyWords.ESCALATION_KEYWORDS import key_words
+from src.KeyWords.ESCALATION_KEYWORDS import key_words
 
 class EscalationChecker:
 

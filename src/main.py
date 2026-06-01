@@ -1,10 +1,10 @@
-from Checkers.SpamChecker import SpamChecker
-from Checkers.EscalationChecker import EscalationChecker
-from Checkers.AutomaticSystemsChecker import AutomaticSystemsChecker
-from Checkers.HRChecker import HRChecker
-from Checkers.CommunicationChecker import CommunicationChecker
-from Checkers.ServiceRequestsChecker import ServiceRequestsChecker
-from Checkers.DocumentationChacker import DocumentationChecker
+from src.Checkers.SpamChecker import SpamChecker
+from src.Checkers.EscalationChecker import EscalationChecker
+from src.Checkers.AutomaticSystemsChecker import AutomaticSystemsChecker
+from src.Checkers.HRChecker import HRChecker
+from src.Checkers.CommunicationChecker import CommunicationChecker
+from src.Checkers.ServiceRequestsChecker import ServiceRequestsChecker
+from src.Checkers.DocumentationChacker import DocumentationChecker
 
 import os
 import shutil
