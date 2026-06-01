@@ -21,7 +21,6 @@ logging.basicConfig(
 )
 
 mail_box = "data/inbox"
-keywords = ["partner"]
 
 escalation = EscalationChecker()
 
@@ -52,7 +51,7 @@ for filename in os.listdir(mail_box):
                     
                     dst = Path(f"data/emails_box/spam/{filename}")
                     dst.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.copy(src, dst)
+                    shutil.copyfile(src, dst)
                     
                     continue
                 
@@ -79,7 +78,7 @@ for filename in os.listdir(mail_box):
 
                 dst = Path(f"data/emails_box/{category}/{new_filename}")
                 dst.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy(src, dst)
+                shutil.copyfile(src, dst)
 
                 logging.info(f"{filename} -> {category}")
                       
@@ -90,6 +89,6 @@ for filename in os.listdir(mail_box):
         src = Path(f"data/inbox/{filename}")
         dst = Path(f"data/emails_box/trash/{filename}")
         dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(src, dst)
+        shutil.copyfile(src, dst)
 
 

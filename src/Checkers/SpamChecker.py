@@ -12,7 +12,6 @@ class SpamChecker:
         score = 0
         
         if not re.search(self.email, txt):
-
             score += 1
             
         for key in key_words:
