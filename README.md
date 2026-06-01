@@ -33,23 +33,24 @@
 Структура проекта
 
 src/
-Checkers/              # модули классификации писем
-KeyWords/              # ключевые слова для анализа
-main.py                # основной скрипт обработки писем
+  - Checkers/              - модули классификации писем
+  - KeyWords/              - ключевые слова для анализа
+  - main.py                - основной скрипт обработки писем
 
-tests/                 # тесты (pytest)
+tests/                   - тесты (pytest)
 
 data/
-inbox/                 # входящие письма
-emails_box/            # результат классификации по папкам
+  - inbox/                 - входящие письма
+  - emails_box/            - результат классификации по папкам
 
-run.sh                 # запуск приложения (Linux / WSL)
-run.bat                # запуск приложения (Windows)
-requirements.txt       # зависимости
+run.sh                   - запуск приложения (Linux / WSL)  
+run.bat                  - запуск приложения (Windows)   
+requirements.txt        - зависимости
 
 Запуск проекта
-1: Зайти в корневую папку проекта
-2: Запуск main
+1. Зайти в корневую папку проекта
+2. Запуск main
+
 Linux / WSL / Git Bash
 
 ```bash
@@ -63,11 +64,14 @@ Windows
 run.bat start
 ```
 
-3: Запуск tests
+3. Запуск tests
+
+Linux / WSL / Git Bash
 
 ```bash
 ./run.sh test
 ```
+Windows
 
 ```bat
 run.bat test
