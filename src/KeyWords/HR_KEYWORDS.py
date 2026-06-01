@@ -1,7 +1,4 @@
-import re
-class HRChecker:
-    
-    key_words = [
+key_words = [
         r"human\s*resources",
         r"кадров",
         r"отдел\s*кадров",
@@ -34,17 +31,6 @@ class HRChecker:
         r"выплат",
         r"перевод\s*денег",
         r"bank\s*transfer",
+        r"приступает\s*к\s*работе",
+        r"перевод",
     ]
-
-    def check(self, mail):
-        txt = mail.text.lower()
-        score = 0
-
-        for key in self.key_words:
-            if re.search(key, txt):
-                score += 1
-            
-        if score >= 2:
-            return True
-        else:
-            return False

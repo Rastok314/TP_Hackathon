@@ -1,24 +1,7 @@
 import re
+from KeyWords.SPAM_KEYWORDS import key_words
+
 class SpamChecker:
-    
-    key_words = [
-        r"вы\s*выиграли",
-        r"поздравляем",
-        r"перейд(и|ите)\s*по\s*ссылке",
-        r"аккаунт.*заблок",
-        r"bit\.ly",
-        r"победител",
-        r"розыгрыш", 
-        r"конкурс", 
-        r"приз", 
-        r"банковск.*", 
-        r"немедленно", 
-        r"срочно", 
-        r"spam",
-        r"спам",
-        r"заблокир",
-        r"акци"
-    ]
     
     email = r"(from|от|от кого):.*@(company|corp)\.(ru|com|local)"
 
@@ -32,7 +15,7 @@ class SpamChecker:
 
             score += 1
             
-        for key in self.key_words:
+        for key in key_words:
             if re.search(key, txt):
                 score += 1
                 flag = True
